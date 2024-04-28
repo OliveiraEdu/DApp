@@ -14,7 +14,7 @@ ADMIN_PRIVATE_KEY = os.getenv(
 
 
 admin_key = os.getenv(ADMIN_PRIVATE_KEY, IrohaCrypto.private_key())
-params = ("40c10f19”                                                          # selector
+params = ("40c10f19"                                                          # selector
           "000000000000000000000000f205c4a929072dd6e7fc081c2a78dbc79c76070b"  # address
           "00000000000000000000000000000000000000000000000000000000000003e8"  # amount
          )
@@ -25,7 +25,7 @@ tx = iroha.transaction([
 IrohaCrypto.sign_transaction(tx, admin_key)
 
 net.send_tx(tx)
-for status in net.tx_status_stream(tx):
-    print(status)net.tx_status_stream(tx):
-    print(status)
 
+
+for status in net.tx_status_stream(tx):
+    print(status)
