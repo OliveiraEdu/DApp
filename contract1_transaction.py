@@ -16,7 +16,7 @@ ADMIN_PRIVATE_KEY = os.getenv(
 admin_key = os.getenv(ADMIN_PRIVATE_KEY, IrohaCrypto.private_key())
 params = ("40c10f19"                                                          # selector
           "000000000000000000000000f205c4a929072dd6e7fc081c2a78dbc79c76070b"  # address
-          "00000000000000000000000000000000000000000000000000000000000003e8"  # amount
+          "00000000000000000000000000000000000000000000000000000000000003E8"  # amount
          )
 
 tx = iroha.transaction([
