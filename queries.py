@@ -104,7 +104,7 @@ query = iroha.query('GetRolePermissions',role_id=ROLE_ID)
 IrohaCrypto.sign_query(query, ADMIN_PRIVATE_KEY)
 response = net.send_query(query)
 data = response
-print(ROLE_ID, data
+print(ROLE_ID, data)
 
 #Query - GetAccountDetail
 query = iroha.query('GetAccountDetail',account_id=ADMIN_ACCOUNT_ID)
