@@ -4,8 +4,9 @@ import binascii
 from grpc import RpcError, StatusCode
 import inspect
 from iroha import Iroha, IrohaGrpc, IrohaCrypto
-from iroha.primitive_pb2 import can_call_engine
+from iroha.primitive_pb2 import can_call_engine, can_append_role, can_add_peer
 from functools import wraps
+import commons
 
 IROHA_HOST_ADDR = os.getenv('IROHA_HOST_ADDR', '127.0.0.1')
 IROHA_PORT = os.getenv('IROHA_PORT', '50051')
@@ -14,6 +15,14 @@ ADMIN_PRIVATE_KEY = os.getenv('ADMIN_PRIVATE_KEY', 'f101537e319568c765b2cc896983
 
 iroha = Iroha(ADMIN_ACCOUNT_ID)
 net = IrohaGrpc(f'{IROHA_HOST_ADDR}:{IROHA_PORT}')
+
+
+# Here we will create user keys
+user_private_key = IrohaCrypto.private_key()
+user_public_key = IrohaCrypto.derive_public_key(user_private_key)
+
+
+
 
 def trace(func):
     @wraps(func)
@@ -60,55 +69,68 @@ def get_commands_from_tx(transaction):
     return commands_from_tx
 
 
-#Query - GetAccountTransactions
-query = iroha.query('GetAccountTransactions', account_id=ADMIN_ACCOUNT_ID, page_size=3)
-IrohaCrypto.sign_query(query, ADMIN_PRIVATE_KEY)
-response = net.send_query(query)
-data = response
-print(data)
 
-#Query - GetRoles
-query = iroha.query('GetRoles')
-IrohaCrypto.sign_query(query, ADMIN_PRIVATE_KEY)
-response = net.send_query(query)
-data = response
-print(data)
+#Create Account
 
-#Query - GetRolePermissions
-ROLE_ID="admin"
-query = iroha.query('GetRolePermissions',role_id=ROLE_ID)
-IrohaCrypto.sign_query(query, ADMIN_PRIVATE_KEY)
-response = net.send_query(query)
-data = response
-print(ROLE_ID, data)
+# # Create Role
+# role_name = 'first_role'
+# role_permissions = [can_call_engine]
 
-#Query - GetRolePermissions
-ROLE_ID="user"
-query = iroha.query('GetRolePermissions',role_id=ROLE_ID)
-IrohaCrypto.sign_query(query, ADMIN_PRIVATE_KEY)
-response = net.send_query(query)
-data = response
-print(ROLE_ID, data)
+# commands = [
+#     iroha.command('CreateRole', role_name=role_name, permissions=role_permissions)
+# ]
 
-#Query - GetRolePermissions
-ROLE_ID="money_creator"
-query = iroha.query('GetRolePermissions',role_id=ROLE_ID)
-IrohaCrypto.sign_query(query, ADMIN_PRIVATE_KEY)
-response = net.send_query(query)
-data = response
-print(ROLE_ID, data)
+# tx = IrohaCrypto.sign_transaction(iroha.transaction(commands), ADMIN_PRIVATE_KEY)
 
-#Query - GetRolePermissions
-ROLE_ID="money_creator"
-query = iroha.query('GetRolePermissions',role_id=ROLE_ID)
-IrohaCrypto.sign_query(query, ADMIN_PRIVATE_KEY)
-response = net.send_query(query)
-data = response
-print(ROLE_ID, data
 
-#Query - GetAccountDetail
-query = iroha.query('GetAccountDetail',account_id=ADMIN_ACCOUNT_ID)
-IrohaCrypto.sign_query(query, ADMIN_PRIVATE_KEY)
-response = net.send_query(query)
-data = response.account_detail_response
-print(f'Account id = {ADMIN_ACCOUNT_ID}, details = {data.detail}')
+#Create Domain
+domain = 'first_domain'
+default_role = 'first_role'
+asset_id = 'first_asset'
+asset_short_id = 'first_coin'
+precision=2
+
+commands = [iroha.command('CreateDomain', domain_id=domain)]
+
+tx = IrohaCrypto.sign_transaction(iroha.transaction(commands), ADMIN_PRIVATE_KEY)
+
+
+
+# Error handling
+try:
+    send_transaction_and_print_status(tx)
+except RuntimeError as e:
+    print(f"Error occurred: {e}")
+
+
+
+# #
+# alice = commons.new_user('alice@test')
+# bob = commons.new_user('bob@test')
+                       
+# second_role = 'burrow_role'
+# second_role_permissions = [can_call_engine]
+
+# commands = [iroha.command('CreateRole', role_name = second_role, permissions = second_role_permissions),iroha.command('CreateAccount', account_name = 'bob', domain_id = 'test', public_key=IrohaCrypto.derive_public_key(bob['key'])), iroha.command('AppendRole', account_id=alice['id'], role_name=second_role)]
+
+
+# tx = IrohaCrypto.sign_transaction(iroha.transaction(commands), ADMIN_PRIVATE_KEY)
+
+
+# # Error handling
+# try:
+#     send_transaction_and_print_status(tx)
+# except RuntimeError as e:
+#     print(f"Error occurred: {e}")
+
+
+
+# @commons.hex
+# def append_role_tx():
+#     # Note that you can append only that role that has
+#     # lesser or the same set of permissions as transaction creator.
+#     tx = iroha.transaction([
+#         iroha.command('AppendRole', account_id=bob['id'], role_name='second_role')
+#     ], creator_account=alice['id'])
+#     IrohaCrypto.sign_transaction(tx, alice['key'])
+#     return tx
