@@ -107,8 +107,9 @@ data = response
 print(ROLE_ID, data)
 
 #Query - GetAccountDetail
-query = iroha.query('GetAccountDetail',account_id=ADMIN_ACCOUNT_ID)
+user = 'userone@domain'
+query = iroha.query('GetAccountDetail',account_id=user)
 IrohaCrypto.sign_query(query, ADMIN_PRIVATE_KEY)
 response = net.send_query(query)
 data = response.account_detail_response
-print(f'Account id = {ADMIN_ACCOUNT_ID}, details = {data.detail}')
+print(f'Account id = {user}, details = {data.detail}')
