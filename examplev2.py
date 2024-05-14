@@ -26,7 +26,7 @@ from iroha.primitive_pb2 import can_append_role
 # you might be using for the transaction.
 # You can find all the permissions here: 
 # https://iroha.readthedocs.io/en/main/develop/api/permissions.html
-from iroha.primitive_pb2 import can_set_my_account_detail
+from iroha.primitive_pb2 import can_set_my_account_detail, can_call_engine
 
 if sys.version_info[0] < 3:
     raise Exception('Python 3 or a more recent version is required.')
@@ -98,7 +98,7 @@ def create_role(new_role, new_permission):
     Add provided amount of specific units to admin account
     """
     tx = iroha.transaction([
-        iroha.command('CreateRole', role_name=new_role, permissions={new_permission})
+        iroha.command('CreateRole', role_name=new_role, permissions=[new_permission])
     ])
     IrohaCrypto.sign_transaction(tx, ADMIN_PRIVATE_KEY)
     send_transaction_and_print_status(tx)
@@ -107,7 +107,7 @@ def create_role(new_role, new_permission):
 
 if __name__ == '__main__':
     try:
-        create_role(new_role='burrow_role', new_permission='can_call_engine')
+        create_role(new_role='burrow_role', new_permission=can_call_engine)
         
     except RpcError as rpc_error:
         if rpc_error.code() == StatusCode.UNAVAILABLE:
