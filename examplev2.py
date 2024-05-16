@@ -26,7 +26,7 @@ from iroha.primitive_pb2 import can_append_role
 # you might be using for the transaction.
 # You can find all the permissions here: 
 # https://iroha.readthedocs.io/en/main/develop/api/permissions.html
-from iroha.primitive_pb2 import can_set_my_account_detail, can_call_engine
+from iroha.primitive_pb2 import can_set_my_account_detail, can_call_engine, can_get_roles
 
 if sys.version_info[0] < 3:
     raise Exception('Python 3 or a more recent version is required.')
@@ -90,6 +90,20 @@ def get_commands_from_tx(transaction):
     return commands_from_tx
 
 
+# @trace
+# def create_domain(domain: str, default_role: str):
+#     """
+#     Creates domain and asset with specific precision provided by arguments
+#     """
+#     commands = [
+#         iroha.command('CreateDomain', domain_id=domain, default_role=default_role),
+#     ]
+# # And sign the transaction using the keys from earlier:
+#     tx = IrohaCrypto.sign_transaction(
+#         iroha.transaction(commands), ADMIN_PRIVATE_KEY)
+#     send_transaction_and_print_status(tx)
+
+
 
 #Create role
 @trace
@@ -107,7 +121,8 @@ def create_role(new_role, new_permission):
 
 if __name__ == '__main__':
     try:
-        create_role(new_role='burrow_role', new_permission=can_call_engine)
+        # create_domain(domain='domain3', default_role='user')
+        create_role(new_role='role2', new_permission=can_get_roles)
         
     except RpcError as rpc_error:
         if rpc_error.code() == StatusCode.UNAVAILABLE:
