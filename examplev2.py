@@ -76,10 +76,10 @@ def send_transaction_and_print_status(transaction):
         print(f"{i}: status_name={status_name}, status_code={status_code}, "
               f"error_code={error_code}")
         if status_name in ('STATEFUL_VALIDATION_FAILED', 'STATELESS_VALIDATION_FAILED', 'REJECTED'):
-            error_code_hr = get_proper_functions_for_commands(commands)(error_code)
+            # Remove the call to get_proper_functions_for_commands for now
+            # error_code_hr = get_proper_functions_for_commands(commands)(error_code)
             raise RuntimeError(f"{status_name} failed on tx: "
-                               f"{transaction} due to reason {error_code}: "
-                               f"{error_code_hr}")
+                               f"{transaction} due to reason {error_code}")
 
 
 def get_commands_from_tx(transaction):
