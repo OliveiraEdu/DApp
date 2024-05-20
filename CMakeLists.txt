@@ -42,9 +42,7 @@ add_custom_command(
   WORKING_DIRECTORY
     "${CMAKE_CURRENT_SOURCE_DIR}"
   COMMAND
-    env "PATH=${ENV_PATH}" "GOPATH=${GOPATH}" go mod download
-  COMMAND
-    env "PATH=${ENV_PATH}" "GOPATH=${GOPATH}" go build
+  env "PATH=${ENV_PATH}" "GOPATH=${GOPATH}" go build
       --modfile "${GO_MOD_FILE_PATH}"
       -modcacherw
       -buildmode=c-archive
