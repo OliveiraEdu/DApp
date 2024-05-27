@@ -95,7 +95,7 @@ def get_account(address):
     no_of_param = 1
     for x in range(no_of_param):
         params = params + left_padded_address_of_param(x, no_of_param)
-    params = params + argument_encoding("test@burrow")  # account id
+    params = params + argument_encoding("test1@burrow")  # account id
     tx = iroha.transaction(
         [
             iroha.command(
