@@ -10,10 +10,6 @@ docker system prune -f
 # Create a new Docker network
 docker network create iroha-network
 
-# Remove the old volume and create a new one
-docker volume rm blockstore
-docker volume create blockstore
-
 # Run the PostgreSQL container
 docker run --name some-postgres \
     -e POSTGRES_USER=postgres \
@@ -22,6 +18,10 @@ docker run --name some-postgres \
     --network=iroha-network \
     -d postgres:9.5 \
     -c 'max_prepared_transactions=100'
+
+# Remove the old volume and create a new one
+docker volume rm blockstore
+docker volume create blockstore
 
 
 # Run the Iroha container
