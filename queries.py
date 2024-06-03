@@ -115,10 +115,10 @@ response = net.send_query(query)
 data = response.account_detail_response
 print(f'Account id = {user}, details = {data.detail}')
 
-#Query - GetAccountDetail
-user = 'newly_registered@test'
-query = iroha.query('GetAccountDetail',account_id=user)
-IrohaCrypto.sign_query(query, ADMIN_PRIVATE_KEY)
-response = net.send_query(query)
-data = response.account_detail_response
-print(f'Account id = {user}, details = {data.detail}')
+# #Query - GetAccountDetail
+# user = 'newly_registered@test'
+# query = iroha.query('GetAccountDetail',account_id=user)
+# IrohaCrypto.sign_query(query, ADMIN_PRIVATE_KEY)
+# response = net.send_query(query)
+# data = response.account_detail_response
+# print(f'Account id = {user}, details = {data.detail}')

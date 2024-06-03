@@ -16,14 +16,14 @@ def download_file_from_ipfs(cid, output_path):
         f.write(file_data)
 
 # Specify the path to the file you want to upload
-local_file_path = '/home/eduardo/Git/DApp/convert.py'
+local_file_path = '/home/eduardo/Git/DApp/commons.py'
 
 # Upload the file to IPFS and get the CID
 file_cid = upload_file_to_ipfs(local_file_path)
 print(f'Uploaded file CID: {file_cid}')
 
 # Specify the path where you want to save the downloaded file
-downloaded_file_path = '/home/eduardo/download/file.txt'
+downloaded_file_path = '/home/eduardo/download/file1.txt'
 
 # Download the file from IPFS using the CID and save it locally
 download_file_from_ipfs(file_cid, downloaded_file_path)
