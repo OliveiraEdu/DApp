@@ -16,7 +16,7 @@ def download_file_from_ipfs(cid, output_path):
         f.write(file_data)
 
 # Specify the path to the file you want to upload
-local_file_path = '/home/eduardo/Git/DApp/commons.py'
+local_file_path = '/home/eduardo/Git/DApp/example.py'
 
 # Upload the file to IPFS and get the CID
 file_cid = upload_file_to_ipfs(local_file_path)

@@ -60,54 +60,54 @@ def get_commands_from_tx(transaction):
     return commands_from_tx
 
 
-#Query - GetAccountTransactions
-query = iroha.query('GetAccountTransactions', account_id=ADMIN_ACCOUNT_ID, page_size=3)
-IrohaCrypto.sign_query(query, ADMIN_PRIVATE_KEY)
-response = net.send_query(query)
-data = response
-print(data)
+# #Query - GetAccountTransactions
+# query = iroha.query('GetAccountTransactions', account_id=ADMIN_ACCOUNT_ID, page_size=3)
+# IrohaCrypto.sign_query(query, ADMIN_PRIVATE_KEY)
+# response = net.send_query(query)
+# data = response
+# print(data)
 
-#Query - GetRoles
-query = iroha.query('GetRoles')
-IrohaCrypto.sign_query(query, ADMIN_PRIVATE_KEY)
-response = net.send_query(query)
-data = response
-print(data)
+# #Query - GetRoles
+# query = iroha.query('GetRoles')
+# IrohaCrypto.sign_query(query, ADMIN_PRIVATE_KEY)
+# response = net.send_query(query)
+# data = response
+# print(data)
 
-#Query - GetRolePermissions
-ROLE_ID="admin"
-query = iroha.query('GetRolePermissions',role_id=ROLE_ID)
-IrohaCrypto.sign_query(query, ADMIN_PRIVATE_KEY)
-response = net.send_query(query)
-data = response
-print(ROLE_ID, data)
+# #Query - GetRolePermissions
+# ROLE_ID="admin"
+# query = iroha.query('GetRolePermissions',role_id=ROLE_ID)
+# IrohaCrypto.sign_query(query, ADMIN_PRIVATE_KEY)
+# response = net.send_query(query)
+# data = response
+# print(ROLE_ID, data)
 
-#Query - GetRolePermissions
-ROLE_ID="user"
-query = iroha.query('GetRolePermissions',role_id=ROLE_ID)
-IrohaCrypto.sign_query(query, ADMIN_PRIVATE_KEY)
-response = net.send_query(query)
-data = response
-print(ROLE_ID, data)
+# #Query - GetRolePermissions
+# ROLE_ID="user"
+# query = iroha.query('GetRolePermissions',role_id=ROLE_ID)
+# IrohaCrypto.sign_query(query, ADMIN_PRIVATE_KEY)
+# response = net.send_query(query)
+# data = response
+# print(ROLE_ID, data)
 
-#Query - GetRolePermissions
-ROLE_ID="money_creator"
-query = iroha.query('GetRolePermissions',role_id=ROLE_ID)
-IrohaCrypto.sign_query(query, ADMIN_PRIVATE_KEY)
-response = net.send_query(query)
-data = response
-print(ROLE_ID, data)
+# #Query - GetRolePermissions
+# ROLE_ID="money_creator"
+# query = iroha.query('GetRolePermissions',role_id=ROLE_ID)
+# IrohaCrypto.sign_query(query, ADMIN_PRIVATE_KEY)
+# response = net.send_query(query)
+# data = response
+# print(ROLE_ID, data)
 
-#Query - GetRolePermissions
-ROLE_ID="first_role"
-query = iroha.query('GetRolePermissions',role_id=ROLE_ID)
-IrohaCrypto.sign_query(query, ADMIN_PRIVATE_KEY)
-response = net.send_query(query)
-data = response
-print(ROLE_ID, data)
+# #Query - GetRolePermissions
+# ROLE_ID="first_role"
+# query = iroha.query('GetRolePermissions',role_id=ROLE_ID)
+# IrohaCrypto.sign_query(query, ADMIN_PRIVATE_KEY)
+# response = net.send_query(query)
+# data = response
+# print(ROLE_ID, data)
 
 
-#Query - GetAccountDetail
+# #Query - GetAccountDetail
 user = 'admin@test'
 query = iroha.query('GetAccountDetail',account_id=user)
 IrohaCrypto.sign_query(query, ADMIN_PRIVATE_KEY)
@@ -115,10 +115,10 @@ response = net.send_query(query)
 data = response.account_detail_response
 print(f'Account id = {user}, details = {data.detail}')
 
-# #Query - GetAccountDetail
-# user = 'newly_registered@test'
-# query = iroha.query('GetAccountDetail',account_id=user)
-# IrohaCrypto.sign_query(query, ADMIN_PRIVATE_KEY)
-# response = net.send_query(query)
-# data = response.account_detail_response
-# print(f'Account id = {user}, details = {data.detail}')
+#Query - GetAccountDetail
+user = 'nostalgic_bartik@test'
+query = iroha.query('GetAccountDetail',account_id=user)
+IrohaCrypto.sign_query(query, ADMIN_PRIVATE_KEY)
+response = net.send_query(query)
+data = response.account_detail_response
+print(f'Account id = {user}, details = {data.detail}')
