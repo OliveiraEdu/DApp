@@ -41,13 +41,13 @@ def read_accounts_from_csv(file_path):
 
 
 # Path to the CSV file
-csv_file_path = 'accounts.csv'
+csv_file_path = 'accounts1.csv'
 
 # Read accounts from CSV
 accounts = read_accounts_from_csv(csv_file_path)
 
 # Use the [n] account from the CSV for the example
-account = accounts[7]
+account = accounts[2]
 
 @integration_helpers.trace
 def create_contract():
