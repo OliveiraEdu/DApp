@@ -119,9 +119,9 @@ def get_account_details():
 
 
 hash = create_contract()
-ic("create_contract:", hash)
+ic(hash)
 address = integration_helpers.get_engine_receipts_address(hash)
-ic("get_engine_receipts_address(hash):", address)
+ic(address)
 hash = get_account_details()
 integration_helpers.get_engine_receipts_result(hash)
 hash = set_account_detail(address, account)
