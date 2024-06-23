@@ -7,6 +7,7 @@ from Crypto.Hash import keccak
 import integration_helpers
 from name_generator import left, right
 import random
+import csv
 
 
 if sys.version_info[0] < 3:
@@ -35,7 +36,13 @@ user_account_right = random.choice(right)
 user_account_short_id = f"{user_account_left}_{user_account_right}"
 print(f"Creating account with name: {user_account_short_id}")
 
-
+def dump_to_csv(account_id, private_key, public_key, filename="accounts1.csv"):
+    file_exists = os.path.isfile(filename)
+    with open(filename, mode='a', newline='') as file:
+        writer = csv.writer(file)
+        if not file_exists:
+            writer.writerow(["Account ID", "Private Key", "Public Key"])
+        writer.writerow([account_id, private_key, public_key])
 
 @integration_helpers.trace
 def create_contract():
