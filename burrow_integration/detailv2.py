@@ -79,7 +79,7 @@ def set_account_detail(address, account):
         account['account_id']
     )  # source account id
     params = params + integration_helpers.argument_encoding("CID")  # key
-    params = params + integration_helpers.argument_encoding("QmW2HkQ1A4Hmq1H2NdC3g9kuTjVpbxTAcNev4VbyRcKbuW")  #  value
+    params = params + integration_helpers.argument_encoding("1234")  #  value
     tx = iroha.transaction(
         [
             iroha.command(
