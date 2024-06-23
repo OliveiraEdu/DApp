@@ -1,3 +1,6 @@
+#detailv3.py
+#best version so far
+
 from Crypto.Hash import keccak
 import os
 import binascii
