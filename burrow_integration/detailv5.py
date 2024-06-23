@@ -5,7 +5,7 @@ from iroha import IrohaCrypto
 from iroha import Iroha, IrohaGrpc
 from iroha.ed25519 import H
 import integration_helpers
-
+import csv
 from iroha.primitive_pb2 import can_set_my_account_detail
 import sys
 
