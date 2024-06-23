@@ -53,7 +53,7 @@ def set_account_detail(address):
             x, no_of_param
         )
     params = params + integration_helpers.argument_encoding(
-        ADMIN_ACCOUNT_ID
+        "nice_montalcini@test"
     )  # source account id
     params = params + integration_helpers.argument_encoding("super")  # key
     params = params + integration_helpers.argument_encoding("019050919050565b600081519050919050565b600081519050919050565b600082825260208201905092915050565b600081905092915050565b60008")  #  value
