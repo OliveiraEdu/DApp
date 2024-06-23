@@ -84,6 +84,7 @@ def create_account(address):
     for status in net.tx_status_stream(tx):
         print(status)
     hex_hash = binascii.hexlify(IrohaCrypto.hash(tx))
+    dump_to_csv(f"{user_account_short_id}@{DOMAIN}", user_private_key, user_public_key)
     return hex_hash
 
 
