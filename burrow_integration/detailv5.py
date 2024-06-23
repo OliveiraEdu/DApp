@@ -11,6 +11,8 @@ import integration_helpers
 import csv
 from iroha.primitive_pb2 import can_set_my_account_detail
 import sys
+from icecream import ic
+
 
 if sys.version_info[0] < 3:
     raise Exception("Python 3 or a more recent version is required.")
@@ -62,7 +64,7 @@ def create_contract():
     net.send_tx(tx)
     hex_hash = binascii.hexlify(IrohaCrypto.hash(tx))
     for status in net.tx_status_stream(tx):
-        print(status)
+        ic(status)
     return hex_hash
 
 
@@ -90,9 +92,9 @@ def set_account_detail(address, account):
     )
     IrohaCrypto.sign_transaction(tx, ADMIN_PRIVATE_KEY)
     response = net.send_tx(tx)
-    print(response)
+    ic(response)
     for status in net.tx_status_stream(tx):
-        print(status)
+        ic(status)
     hex_hash = binascii.hexlify(IrohaCrypto.hash(tx))
     return hex_hash
 
@@ -111,17 +113,19 @@ def get_account_details():
     IrohaCrypto.sign_transaction(tx, ADMIN_PRIVATE_KEY)
     response = net.send_tx(tx)
     for status in net.tx_status_stream(tx):
-        print(status)
+        ic(status)
     hex_hash = binascii.hexlify(IrohaCrypto.hash(tx))
     return hex_hash
 
 
 hash = create_contract()
+ic("create_contract:", hash)
 address = integration_helpers.get_engine_receipts_address(hash)
+ic("get_engine_receipts_address(hash):", address)
 hash = get_account_details()
 integration_helpers.get_engine_receipts_result(hash)
 hash = set_account_detail(address, account)
-print(account)
+ic(account)
 hash = get_account_details()
 integration_helpers.get_engine_receipts_result(hash)
-print("done")
+ic("done")
