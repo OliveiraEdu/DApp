@@ -47,7 +47,7 @@ csv_file_path = 'accounts.csv'
 accounts = read_accounts_from_csv(csv_file_path)
 
 # Use the [n] account from the CSV for the example
-account = accounts[5]
+account = accounts[8]
 
 @integration_helpers.trace
 def create_contract():
