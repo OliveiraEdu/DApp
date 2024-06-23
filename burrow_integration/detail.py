@@ -55,8 +55,8 @@ def set_account_detail(address):
     params = params + integration_helpers.argument_encoding(
         ADMIN_ACCOUNT_ID
     )  # source account id
-    params = params + integration_helpers.argument_encoding("university")  # key
-    params = params + integration_helpers.argument_encoding("MIT")  #  value
+    params = params + integration_helpers.argument_encoding("super")  # key
+    params = params + integration_helpers.argument_encoding("019050919050565b600081519050919050565b600081519050919050565b600082825260208201905092915050565b600081905092915050565b60008")  #  value
     tx = iroha.transaction(
         [
             iroha.command(
