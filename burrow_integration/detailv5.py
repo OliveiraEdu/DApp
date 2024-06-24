@@ -49,7 +49,7 @@ csv_file_path = 'accounts1.csv'
 accounts = read_accounts_from_csv(csv_file_path)
 
 # Use the [n] account from the CSV for the example
-account = accounts[1]
+account = accounts[4]
 
 
 
@@ -81,7 +81,7 @@ def set_account_detail(address, account):
     params = params + integration_helpers.argument_encoding(
         account['account_id']
     )  # source account id
-    params = params + integration_helpers.argument_encoding("super")  # key
+    params = params + integration_helpers.argument_encoding("duper")  # key
     params = params + integration_helpers.argument_encoding("NAOEHOADMIN019050919050565b600081519050919050565b600081519050919050565b600082825260208201905092915050565b600081905092915050565b60008")  #  value
     tx = iroha.transaction(
         [
