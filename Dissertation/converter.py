@@ -20,9 +20,10 @@ def read_md_file(filename):
 # Assuming the .md file is named "diagram.md" and is in the same directory as the script
 md_filename = os.path.join(os.getcwd(), "test.md")
 print(md_filename)
-# graph = read_md_file(md_filename)
-# print(graph)
-# mm(graph)
+graph = read_md_file(md_filename)
+print(graph)
+
+mm(graph)
 
 
 #-
